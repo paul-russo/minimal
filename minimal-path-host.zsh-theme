@@ -9,8 +9,23 @@ function lprompt() {
   echo "$user_privilege$bg_job$cmd_status$suffix"
 }
 
-source ./path.zsh
-source ./host.zsh
+
+#source ./host.zsh
+function prompt_host(){
+  local host_prefix=" %{$FG[244]%}"
+  local host_name="$host_prefix%m"
+
+  echo "$host_prefix$host_name"
+}
+
+
+#source ./path.zsh
+function prompt_path() {
+  local working_dir="%{$FG[244]%}%2~"
+
+  echo "$working_dir"
+}
+
 
 function rprompt() {
   echo "$(prompt_path)$(prompt_host)"
