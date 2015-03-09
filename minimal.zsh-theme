@@ -1,12 +1,3 @@
-PROMPT_CHAR="❯"
+source $(dirname $0)/modules/minimal.zsh
 
-function lprompt() {
-  local user_privilege="%(!.%{$fg[green]%}.%{$reset_color%})$PROMPT_CHAR"
-  local bg_job="%(1j.%{$fg[green]%}.%{$reset_color%})$PROMPT_CHAR"
-  local cmd_status="%(0?.%{$fg[green]%}.%{$fg[red]%})$PROMPT_CHAR"
-  local suffix="%{$reset_color%} "
-
-  echo "$user_privilege$bg_job$cmd_status$suffix"
-}
-
-PROMPT='$(lprompt)'
+PROMPT="$(prompt_minimal)"
