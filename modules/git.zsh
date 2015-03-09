@@ -9,13 +9,13 @@ function git_prompt_info() {
 
 #git theming settings
 ZSH_THEME_GIT_PROMPT_PREFIX=" "
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX=""
 
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}"
 
 function prompt_git() {
-  local branch="$(parse_git_dirty)$(git_prompt_info)"
+  local branch="$(parse_git_dirty)$(git_prompt_info)%{$reset_color%}"
 
   echo "$branch"
 }
