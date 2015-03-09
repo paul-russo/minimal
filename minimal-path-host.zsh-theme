@@ -13,7 +13,7 @@ function lprompt() {
 #source ./host.zsh
 function prompt_host(){
   local host_prefix=" %{$FG[244]%}"
-  local host_name="$host_prefix%m"
+  local host_name="$host_prefix%m%{$reset_color%}"
 
   echo "$host_prefix$host_name"
 }
@@ -21,7 +21,7 @@ function prompt_host(){
 
 #source ./path.zsh
 function prompt_path() {
-  local working_dir="%{$FG[244]%}%2~"
+  local working_dir="%{$FG[244]%}%2~%{$reset_color%}"
 
   echo "$working_dir"
 }

@@ -11,7 +11,7 @@ function lprompt() {
 
 #source ./path.zsh
 function prompt_path() {
-  local working_dir="%{$FG[244]%}%2~"
+  local working_dir="%{$FG[244]%}%2~%{$reset_color%}"
 
   echo "$working_dir"
 }
@@ -29,13 +29,13 @@ function git_prompt_info() {
 
 #git theming settings
 ZSH_THEME_GIT_PROMPT_PREFIX=" "
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX=""
 
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}"
 
 function prompt_git() {
-  local branch="$(parse_git_dirty)$(git_prompt_info)"
+  local branch="$(parse_git_dirty)$(git_prompt_info)%{$reset_color%}"
 
   echo "$branch"
 }
@@ -44,7 +44,7 @@ function prompt_git() {
 #source ./host.zsh
 function prompt_host(){
   local host_prefix=" %{$FG[244]%}"
-  local host_name="$host_prefix%m"
+  local host_name="$host_prefix%m%{$reset_color%}"
 
   echo "$host_prefix$host_name"
 }
