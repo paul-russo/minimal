@@ -30,7 +30,7 @@ minimal-path.zsh-theme
 It will show the last 2 segments of your current directory in the right prompt.
 Home directory is abbreviated with `~`.
 ```
-❯❯❯                                         Workspace/minimal
+❯❯❯                                                           Workspace/minimal
 ```
 
 minimal-path-host.zsh-theme
@@ -52,7 +52,12 @@ The branch name will be red if is dirty, otherwise will be green.
 
 minimal-path-git-host.zsh-theme
 -------------------------------
-It shouldn't be hard to guess, but here the example anyway.
+It shouldn't be hard to guess at this point, but here the example anyway.
 ```
 ❯❯❯                                           Workspace/minimal master  SierraX
 ```
+
+LICENSE
+=======
+
+MIT (see LICENSE file)
