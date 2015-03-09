@@ -9,13 +9,7 @@ function lprompt() {
   echo "$user_privilege$bg_job$cmd_status$suffix"
 }
 
-#source ./path.zsh
-function prompt_path() {
-  local working_dir="%{$FG[244]%}%2~%{$reset_color%}"
-
-  echo "$working_dir"
-}
-
+source $(dirname $0)/modules/path.zsh
 
 function rprompt() {
   echo "$(prompt_path)"
