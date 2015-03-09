@@ -1,21 +1,17 @@
-# git_prompt_info override
-function git_prompt_info() {
-  if [[ "$(command git config --get oh-my-zsh.hide-status 2>/dev/null)" != "1" ]]; then
-    ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
-    ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
-    echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$ZSH_THEME_GIT_PROMPT_SUFFIX"
+function git_branch_name() {
+  local branch_name="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
+  [[ -n $branch_name ]] && echo " $branch_name"
+}
+
+function git_is_dirty() {
+  if [[ -n "$(git status --porcelain 2> /dev/null | tail -n1)" ]]; then
+    echo "%{$fg[red]%}"
+  else
+    echo "%{$fg[green]%}"
   fi
 }
 
-#git theming settings
-ZSH_THEME_GIT_PROMPT_PREFIX=" "
-ZSH_THEME_GIT_PROMPT_SUFFIX=""
-
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}"
-
 function prompt_git() {
-  local branch="$(parse_git_dirty)$(git_prompt_info)%{$reset_color%}"
-
-  echo "$branch"
+  local infos="$(git_is_dirty)$(git_branch_name)%{$reset_color%}"
+  echo "$infos"
 }

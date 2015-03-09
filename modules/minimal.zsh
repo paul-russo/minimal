@@ -1,5 +1,7 @@
 autoload -U colors && colors
 
+setopt prompt_subst
+
 PROMPT_CHAR="❯"
 
 function prompt_minimal() {
