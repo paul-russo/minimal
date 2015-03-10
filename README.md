@@ -56,6 +56,21 @@ It shouldn't be hard to guess at this point, but here the example anyway.
 ❯❯❯                                            Workspace/minimal master SierraX
 ```
 
+Customization
+=============
+If you just don't like the color palette, you can use your own!  
+Before you source the theme, you can alter these variable value to suit your
+needs:
+* **PROMPT_CHAR**: if you need another character in the prompt (default `❯`)
+* **ACCENT_COLOR**: by default is `$fg[green]`, is used to show statuses (root
+permissions, bg jobs, exit status == 0, branch is clean).
+* **ERROR_COLOR**: by default is `$fg[red]`, is used to show error statuses
+(exit status != 0, branch is dirty).
+* **NORMAL_COLOR**: by default is `$reset_color`, is used to show normal
+statuses (user isn't root, no bg jobs).
+* **PATH_COLOR**: by default is `[38;5;244m`, is the color used for path
+* **HOST_COLOR**: by default is `[38;5;244m`, is the color used for host
+
 LICENSE
 =======
 

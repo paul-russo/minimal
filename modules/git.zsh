@@ -5,9 +5,9 @@ function git_branch_name() {
 
 function git_is_dirty() {
   if [[ -n "$(git status --porcelain 2> /dev/null | tail -n1)" ]]; then
-    echo "%{$fg[red]%}"
+    echo "%{$ERROR_COLOR%}"
   else
-    echo "%{$fg[green]%}"
+    echo "%{$ACCENT_COLOR%}"
   fi
 }
 
