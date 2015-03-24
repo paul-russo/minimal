@@ -4,57 +4,21 @@ Here's a screenshot of **minimal-path-git** variant:
 
 ![alt tag](https://raw.github.com/S1cK94/minimal/master/screen.gif)
 
-There are 4 variants:
-
-* **minimal**: it loads only `minimal` module.
-* **minimal-path**: it loads `minimal` and `path` modules.
-* **minimal-path-host**: it loads `minimal`, `path` and `host` modules.
-* **minimal-path-git**: it loads `minimal`, `path` and `git` modules.
-* **minimal-path-git-host**: loads `minimal`, `path`, `git` and `host` modules
-
-minimal
------------------
-The left prompt is very discrete but useful:
+Damn son! Show me teh codez!!
+=============================
+Antigen:
 ```
-❯❯❯
-```
-* The first `❯` will light up (becomes green) if you have super user privileges.
-* The second `❯` will light up (becomes green) if you have 1 or more background jobs.
-* The third `❯` will become green if the exit status of your last command is 0,
-otherwise will become red
-
-minimal-path
-----------------------
-It will show the last 2 segments of your current directory in the right
-prompt.  
-Home directory is abbreviated with `~`.
-```
-❯❯❯                                                           Workspace/minimal
+antigen theme S1cK94/minimal minimal-path-git
 ```
 
-minimal-path-host
----------------------------
-It will display the hostname (up to the first `.`) in the right prompt.
+Oh-my-zsh:
 ```
-❯❯❯                                                   Workspace/minimal SierraX
+cd path/to/ohmyzsh/custom/themes
+git submodule add https://github.com/S1cK94/minimal.git
 ```
+and set `ZSH_THEME=minimal` somewhere in .zshrc
 
-minimal-path-git
---------------------------
-If you work with git, you will appreciate this.  
-It will show branch information in the right prompt.
-The branch name will be red if is dirty, otherwise will be green.
-
-```
-❯❯❯                                                    Workspace/minimal master
-```
-
-minimal-path-git-host
--------------------------------
-It shouldn't be hard to guess at this point, but here the example anyway.
-```
-❯❯❯                                            Workspace/minimal master SierraX
-```
+Or you can always do a good old clone & source.
 
 Customization
 =============
@@ -63,15 +27,77 @@ Before you source the theme, you can alter these variable value to suit your
 needs:
 * **PROMPT_CHAR**: if you need another character in the prompt (default `❯`)
 * **ACCENT_COLOR**: by default is `$fg[green]`, is used to show statuses (root
-permissions, bg jobs, exit status == 0, branch is clean).
+permissions, bg jobs, exit status == 0, branch is clean, vi insert mode).
 * **ERROR_COLOR**: by default is `$fg[red]`, is used to show error statuses
 (exit status != 0, branch is dirty).
 * **NORMAL_COLOR**: by default is `$reset_color`, is used to show normal
-statuses (user isn't root, no bg jobs).
+statuses (user isn't root, no bg jobs, vi normal/command mode).
 * **PATH_COLOR**: by default is `[38;5;244m`, is the color used for path
 * **HOST_COLOR**: by default is `[38;5;244m`, is the color used for host
 
+Modules
+=======
+I splitted the functionalities of this theme into modules, so it's easier to 
+maintain, fork and create your own variant by rearranging item and/or adding more
+functionalities.
+
+Defaults module
+---------------
+It contains some default values used by every variant.  
+Basically it enables colors, prompt substitution and sets default colors.  
+Can be omitted if you have those already in your .zshrc.
+It's loaded by all variants.
+
+User module
+-----------
+Prints a `$PROMPT_CHAR`. Uses `$ACCENT_COLOR` if you're logged in as a
+privileged user, otherwise uses `$NORMAL_COLOR`.
+
+Jobs module
+-----------
+Prints a `$PROMPT_CHAR`. Uses `$ACCENT_COLOR` if you have 1 or more background
+jobs, otherwise uses `$NORMAL_COLOR`
+
+Vimode module
+-----------
+Prints a `$PROMPT_CHAR`. Uses `$ACCENT_COLOR` if you're in **INSERT** mode,
+uses `$NORMAL_COLOR` if you're in **NORMAL** mode.
+
+Status module
+-----------
+Prints a `$PROMPT_CHAR`. Uses `$ACCENT_COLOR` if your last command exited with
+status 0, otherwise uses `$ERROR_COLOR`.
+
+Path module
+-----------
+Prints current working directory. `$HOME` is rendered as `~`. Shows only 2 last
+segments. Uses `$PATH_COLOR`.
+
+Git module
+-----------
+Prints current branch when in a git repo. Uses `$ACCENT_COLOR` if branch is
+clean, otherwise uses `$ERROR_COLOR`.
+
+Host module
+-----------
+Prints hostname up to the first dot. Uses `$HOST_COLOR`.
+
+
+Variants
+========
+There are 6 variants:
+
+* **minimal**: which shows *user*, *jobs* and *status*.
+* **minimal-vimode**: which shows *user*, *jobs*, *status* and *vimode*.
+* **minimal-path**: which shows *user*, *jobs*, *status* and *path*.
+* **minimal-path-host**: which shows *user*, *jobs*, *status*, *path* and
+*host*.
+* **minimal-path-git**: which shows *user*, *jobs*, *status*, *path* and *git*.
+* **minimal-vimode-path-git**: which shows *user*, *jobs*, *status*, *vimode*,
+*path* and *git*.
+* **minimal-path-git-host**: which shows *user*, *jobs*, *status*, *path*,
+*git* and *host*.
+
 LICENSE
 =======
-
 MIT (see LICENSE file)
