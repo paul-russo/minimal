@@ -9,6 +9,7 @@ NORMAL_COLOR=${NORMAL_COLOR:-"$reset_color"}
 PATH_COLOR=${PATH_COLOR:-"[38;5;244m"}
 HOST_COLOR=${HOST_COLOR:-"[38;5;244m"}
 
+
 function prompt_minimal() {
   #just some shorthands
   local rs="%{$reset_color%}"
@@ -16,10 +17,10 @@ function prompt_minimal() {
   local error="%{$ERROR_COLOR%}"
   local normal="%{$NORMAL_COLOR%}"
 
+
   local user_privilege="%(!.$accent.$normal)$PROMPT_CHAR$rs"
   local bg_job="%(1j.$accent.$normal)$PROMPT_CHAR$rs"
   local cmd_status="%(0?.$accent.$error)$PROMPT_CHAR$rs"
-  local suffix=" "
 
-  echo "$user_privilege$bg_job$cmd_status$suffix"
+  echo "$user_privilege$bg_job$cmd_status"
 }

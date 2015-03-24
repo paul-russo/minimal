@@ -1,6 +1,6 @@
 function git_branch_name() {
   local branch_name="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
-  [[ -n $branch_name ]] && echo " $branch_name"
+  [[ -n $branch_name ]] && echo "$branch_name"
 }
 
 function git_is_dirty() {
@@ -12,6 +12,9 @@ function git_is_dirty() {
 }
 
 function prompt_git() {
-  local infos="$(git_is_dirty)$(git_branch_name)%{$reset_color%}"
-  echo "$infos"
+  local bname=$(git_branch_name)
+  if [[ -n $bname ]]; then
+    local infos="$(git_is_dirty)$bname%{$reset_color%}"
+    echo " $infos"
+  fi
 }
