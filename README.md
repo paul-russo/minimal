@@ -2,7 +2,7 @@ M_N_M_L
 =======
 Here's a screenshot of **minimal-path-git** variant:
 
-![alt tag](https://raw.github.com/S1cK94/minimal/master/minimal.gif)
+![alt tag](https://raw.github.com/S1cK94/minimal/master/screen.gif)
 
 There are 4 variants:
 
