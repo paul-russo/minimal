@@ -52,6 +52,7 @@ minimal-vimode-path-git:
 		$M/status.zsh \
 		$M/vimode.zsh \
 		$M/path.zsh \
+		$M/git.zsh \
 		$P/$@.zsh; \
 	do \
 		(cat $$f; echo) >> $B/$@.zsh-theme; \
