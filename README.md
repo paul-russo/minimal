@@ -8,17 +8,17 @@ Damn son! Show me teh codez!!
 =============================
 Antigen:
 ```
-antigen theme S1cK94/minimal minimal-path-git
+antigen theme S1cK94/minimal builds/minimal-path-git
 ```
 
 Oh-my-zsh:
 ```
 cd path/to/ohmyzsh/custom/themes
-git submodule add https://github.com/S1cK94/minimal.git
+wget https://raw.github.com/S1cK94/minimal/master/builds/minimal-path-git.zsh-theme
 ```
-and set `ZSH_THEME=minimal` somewhere in .zshrc
+and set `ZSH_THEME="minimal-path-git"` somewhere in .zshrc
 
-Or you can always do a good old clone & source.
+Or you can always grab the build you want & source it.
 
 Customization
 =============
@@ -37,7 +37,7 @@ statuses (user isn't root, no bg jobs, vi normal/command mode).
 
 Modules
 =======
-I splitted the functionalities of this theme into modules, so it's easier to 
+I splitted the functionalities of this theme into modules, so it's easier to
 maintain, fork and create your own variant by rearranging item and/or adding more
 functionalities.
 
