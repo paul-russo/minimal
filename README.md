@@ -2,7 +2,7 @@ M_N_M_L
 =======
 Here's a screenshot of **minimal-path-git** variant:
 
-![alt tag](https://raw.github.com/S1cK94/minimal/master/screen.gif)
+![alt tag](https://raw.github.com/S1cK94/minimal/master/screen.jpg)
 
 Damn son! Show me teh codez!!
 =============================
@@ -34,6 +34,12 @@ permissions, bg jobs, exit status == 0, branch is clean, vi insert mode).
 statuses (user isn't root, no bg jobs, vi normal/command mode).
 * **PATH_COLOR**: by default is `[38;5;244m`, is the color used for path
 * **HOST_COLOR**: by default is `[38;5;244m`, is the color used for host
+* **AHEAD_COLOR**: by default is `$NORMAL_COLOR`, is the color used to show if
+branch is ahead
+* **BEHIND_COLOR**: by default is `[38;5;208m`, is the color used to show if
+branch is behind
+* **DIVERGED_COLOR**: by default is `$ERROR_COLOR`, is the color used to show if
+branch has diverged
 
 Modules
 =======
@@ -50,37 +56,32 @@ It's loaded by all variants.
 
 User module
 -----------
-Prints a `$PROMPT_CHAR`. Uses `$ACCENT_COLOR` if you're logged in as a
-privileged user, otherwise uses `$NORMAL_COLOR`.
+Prints a `$PROMPT_CHAR` with info about the current user.
 
 Jobs module
 -----------
-Prints a `$PROMPT_CHAR`. Uses `$ACCENT_COLOR` if you have 1 or more background
-jobs, otherwise uses `$NORMAL_COLOR`
+Prints a `$PROMPT_CHAR`. with info about the background jobs.
 
 Vimode module
 -----------
-Prints a `$PROMPT_CHAR`. Uses `$ACCENT_COLOR` if you're in **INSERT** mode,
-uses `$NORMAL_COLOR` if you're in **NORMAL** mode.
+Prints a `$PROMPT_CHAR` with info about the current mode.
 
 Status module
 -----------
-Prints a `$PROMPT_CHAR`. Uses `$ACCENT_COLOR` if your last command exited with
-status 0, otherwise uses `$ERROR_COLOR`.
+Prints a `$PROMPT_CHAR` with info about the exit status of the last command.
 
 Path module
 -----------
 Prints current working directory. `$HOME` is rendered as `~`. Shows only 2 last
-segments. Uses `$PATH_COLOR`.
+segments.
 
 Git module
 -----------
-Prints current branch when in a git repo. Uses `$ACCENT_COLOR` if branch is
-clean, otherwise uses `$ERROR_COLOR`.
+Prints current branch when in a git repo.
 
 Host module
 -----------
-Prints hostname up to the first dot. Uses `$HOST_COLOR`.
+Prints hostname up to the first dot.
 
 
 Variants
