@@ -8,14 +8,17 @@ for color in {000..255}; do
 done
 
 PROMPT_CHAR=${PROMPT_CHAR:-"❯"}
+
 ACCENT_COLOR=${ACCENT_COLOR:-"$fg[green]"}
 ERROR_COLOR=${ERROR_COLOR:-"$fg[red]"}
 NORMAL_COLOR=${NORMAL_COLOR:-"$reset_color"}
+
 PATH_COLOR=${PATH_COLOR:-"$FG[244]"}
 HOST_COLOR=${HOST_COLOR:-"$FG[244]"}
-AHEAD_COLOR=${AHEAD_COLOR:-"$FG[208]"}
-BEHIND_COLOR=${AHEAD_COLOR:-"$FG[208]"}
-DIVERGED_COLOR=${AHEAD_COLOR:-"$FG[208]"}
+
+AHEAD_COLOR=${AHEAD_COLOR:-"$NORMAL_COLOR"}
+BEHIND_COLOR=${BEHIND_COLOR:-"$FG[208]"}
+DIVERGED_COLOR=${DIVERGED_COLOR:-"$ERROR_COLOR"}
 
 function prompt_user() {
   echo "%(!.%{$ACCENT_COLOR%}.%{$NORMAL_COLOR%})$PROMPT_CHAR%{$reset_color%}"
@@ -40,10 +43,18 @@ function git_branch_name() {
   [[ -n $branch_name ]] && echo "$branch_name"
 }
 
-function git_is_dirty() {
-  if [[ -n "$(git status --porcelain 2> /dev/null | tail -n1)" ]]; then
+function git_repo_status(){
+  local rs="$(git status --porcelain -b)"
+
+  if $(echo "$rs" | grep -v '^##' &> /dev/null); then # is dirty
     echo "%{$ERROR_COLOR%}"
-  else
+  elif $(echo "$rs" | grep '^## .*diverged' &> /dev/null); then # has diverged
+    echo "%{$DIVERGED_COLOR%}"
+  elif $(echo "$rs" | grep '^## .*behind' &> /dev/null); then # is behind
+    echo "%{$BEHIND_COLOR%}"
+  elif $(echo "$rs" | grep '^## .*ahead' &> /dev/null); then # is ahead
+    echo "%{$AHEAD_COLOR%}"
+  else # is clean
     echo "%{$ACCENT_COLOR%}"
   fi
 }
@@ -51,7 +62,7 @@ function git_is_dirty() {
 function prompt_git() {
   local bname=$(git_branch_name)
   if [[ -n $bname ]]; then
-    local infos="$(git_is_dirty)$bname%{$reset_color%}"
+    local infos="$(git_repo_status)$bname%{$reset_color%}"
     echo " $infos"
   fi
 }
