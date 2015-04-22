@@ -2,55 +2,28 @@ autoload -U colors && colors
 
 setopt prompt_subst
 
-for color in {000..255}; do
-    FG[$color]="%{[38;5;${color}m%}"
-    BG[$color]="%{[48;5;${color}m%}"
-done
+PROMPT_CHAR="❯"
 
-PROMPT_CHAR=${PROMPT_CHAR:-"❯"}
-
-ACCENT_COLOR=${ACCENT_COLOR:-"$fg[green]"}
-ERROR_COLOR=${ERROR_COLOR:-"$fg[red]"}
-NORMAL_COLOR=${NORMAL_COLOR:-"$reset_color"}
-
-PATH_COLOR=${PATH_COLOR:-"$FG[244]"}
-HOST_COLOR=${HOST_COLOR:-"$FG[244]"}
-
-AHEAD_COLOR=${AHEAD_COLOR:-"$NORMAL_COLOR"}
-BEHIND_COLOR=${BEHIND_COLOR:-"$FG[208]"}
-DIVERGED_COLOR=${DIVERGED_COLOR:-"$ERROR_COLOR"}
+ON_COLOR="%{$fg[green]%}"
+OFF_COLOR="%{$reset_color%}"
+ERR_COLOR="%{$fg[red]%}"
 
 function prompt_user() {
-  echo "%(!.%{$ACCENT_COLOR%}.%{$NORMAL_COLOR%})$PROMPT_CHAR%{$reset_color%}"
+  echo "%(!.$ON_COLOR.$OFF_COLOR)$PROMPT_CHAR%{$reset_color%}"
 }
 
 function prompt_jobs() {
-  echo "%(1j.%{$ACCENT_COLOR%}.%{$NORMAL_COLOR%})$PROMPT_CHAR%{$reset_color%}"
+  echo "%(1j.$ON_COLOR.$OFF_COLOR)$PROMPT_CHAR%{$reset_color%}"
 }
 
 function prompt_status() {
-  echo "%(0?.%{$ACCENT_COLOR%}.%{$ERROR_COLOR%})$PROMPT_CHAR%{$reset_color%}"
+  echo "%(0?.$ON_COLOR.$ERR_COLOR)$PROMPT_CHAR%{$reset_color%}"
 }
-
-function prompt_vimode(){
-  local NMODE="%{$NORMAL_COLOR%}$PROMPT_CHAR%{$reset_color%}"
-  local IMODE="%{$ACCENT_COLOR%}$PROMPT_CHAR%{$reset_color%}"
-  echo "${${KEYMAP/vicmd/$NMODE}/(main|viins)/$IMODE}"
-}
-
-function zle-line-init zle-line-finish zle-keymap-select {
-  zle reset-prompt
-  zle -R
-}
-
-zle -N zle-line-init
-zle -N zle-keymap-select
-zle -N zle-line-finish
 
 function prompt_path() {
-  local working_dir="%{$PATH_COLOR%}%2~%{$reset_color%}"
+  local path_color="%{[38;5;244m%}%}"
 
-  echo "$working_dir"
+  echo "$path_color%2~%{$reset_color%}"
 }
 
 function git_branch_name() {
@@ -62,15 +35,15 @@ function git_repo_status(){
   local rs="$(git status --porcelain -b)"
 
   if $(echo "$rs" | grep -v '^##' &> /dev/null); then # is dirty
-    echo "%{$ERROR_COLOR%}"
+    echo "%{$fg[red]%}"
   elif $(echo "$rs" | grep '^## .*diverged' &> /dev/null); then # has diverged
-    echo "%{$DIVERGED_COLOR%}"
+    echo "%{$fg[red]%}"
   elif $(echo "$rs" | grep '^## .*behind' &> /dev/null); then # is behind
-    echo "%{$BEHIND_COLOR%}"
+    echo "%{[38;5;011m%}%}"
   elif $(echo "$rs" | grep '^## .*ahead' &> /dev/null); then # is ahead
-    echo "%{$AHEAD_COLOR%}"
+    echo "%{$reset_color%}"
   else # is clean
-    echo "%{$ACCENT_COLOR%}"
+    echo "%{$fg[green]%}"
   fi
 }
 
@@ -81,6 +54,36 @@ function prompt_git() {
     echo " $infos"
   fi
 }
+
+function prompt_vimode(){
+  local ret=""
+
+  case $KEYMAP in
+    main|viins)
+      ret+="$ON_COLOR"
+      ;;
+    vicmd)
+      ret+="$OFF_COLOR"
+      ;;
+  esac
+
+  ret+="$PROMPT_CHAR%{$reset_color%}"
+
+  echo "$ret"
+}
+
+function zle-line-init zle-line-finish zle-keymap-select {
+  zle reset-prompt
+  zle -R
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+zle -N zle-line-finish
+
+autoload -U colors && colors
+
+setopt prompt_subst
 
 PROMPT='$(prompt_user)$(prompt_jobs)$(prompt_vimode)$(prompt_status) '
 RPROMPT='$(prompt_path)$(prompt_git)'

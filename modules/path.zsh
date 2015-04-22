@@ -1,5 +1,5 @@
 function prompt_path() {
-  local working_dir="%{$PATH_COLOR%}%2~%{$reset_color%}"
+  local path_color="%{[38;5;244m%}%}"
 
-  echo "$working_dir"
+  echo "$path_color%2~%{$reset_color%}"
 }

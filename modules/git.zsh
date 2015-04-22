@@ -7,15 +7,15 @@ function git_repo_status(){
   local rs="$(git status --porcelain -b)"
 
   if $(echo "$rs" | grep -v '^##' &> /dev/null); then # is dirty
-    echo "%{$ERROR_COLOR%}"
+    echo "%{$fg[red]%}"
   elif $(echo "$rs" | grep '^## .*diverged' &> /dev/null); then # has diverged
-    echo "%{$DIVERGED_COLOR%}"
+    echo "%{$fg[red]%}"
   elif $(echo "$rs" | grep '^## .*behind' &> /dev/null); then # is behind
-    echo "%{$BEHIND_COLOR%}"
+    echo "%{[38;5;011m%}%}"
   elif $(echo "$rs" | grep '^## .*ahead' &> /dev/null); then # is ahead
-    echo "%{$AHEAD_COLOR%}"
+    echo "%{$reset_color%}"
   else # is clean
-    echo "%{$ACCENT_COLOR%}"
+    echo "%{$fg[green]%}"
   fi
 }
 

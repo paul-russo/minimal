@@ -15,9 +15,9 @@ minimal:
 		$M/user.zsh \
 		$M/jobs.zsh \
 		$M/status.zsh \
-		$M/vimode.zsh \
 		$M/path.zsh \
 		$M/git.zsh \
+		$M/vimode.zsh \
 		prompt.zsh; \
 	do \
 		(cat $$f; echo) >> minimal.zsh-theme; \

@@ -1,7 +1,18 @@
 function prompt_vimode(){
-  local NMODE="%{$NORMAL_COLOR%}$PROMPT_CHAR%{$reset_color%}"
-  local IMODE="%{$ACCENT_COLOR%}$PROMPT_CHAR%{$reset_color%}"
-  echo "${${KEYMAP/vicmd/$NMODE}/(main|viins)/$IMODE}"
+  local ret=""
+
+  case $KEYMAP in
+    main|viins)
+      ret+="$ON_COLOR"
+      ;;
+    vicmd)
+      ret+="$OFF_COLOR"
+      ;;
+  esac
+
+  ret+="$PROMPT_CHAR%{$reset_color%}"
+
+  echo "$ret"
 }
 
 function zle-line-init zle-line-finish zle-keymap-select {
