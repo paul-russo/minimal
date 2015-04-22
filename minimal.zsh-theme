@@ -22,8 +22,10 @@ function prompt_status() {
 
 function prompt_path() {
   local path_color="%{[38;5;244m%}%}"
+  local wd=$(print -P '%2~')
+  local sep="%{$reset_color%}/$path_color"
 
-  echo "$path_color%2~%{$reset_color%}"
+  echo "$path_color${wd//\//$sep}%{$reset_color%}"
 }
 
 function git_branch_name() {
@@ -80,10 +82,6 @@ function zle-line-init zle-line-finish zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 zle -N zle-line-finish
-
-autoload -U colors && colors
-
-setopt prompt_subst
 
 PROMPT='$(prompt_user)$(prompt_jobs)$(prompt_vimode)$(prompt_status) '
 RPROMPT='$(prompt_path)$(prompt_git)'
