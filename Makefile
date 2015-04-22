@@ -1,17 +1,15 @@
 M=modules
-P=prompts
-B=builds
 
 all:
 	@make clean
-	@make minimal-vimode-path-git
+	@make minimal
 
 clean:
-	rm -f $B/*.zsh-theme
+	rm -f minimal.zsh-theme
 
-minimal-vimode-path-git:
-	rm -f $B/$@.zsh-theme
-	@echo "making $B/$@.zsh-theme"
+minimal:
+	rm -f minimal.zsh-theme
+	@echo "making minimal.zsh-theme"
 	@for f in \
 		$M/defaults.zsh \
 		$M/user.zsh \
@@ -20,7 +18,7 @@ minimal-vimode-path-git:
 		$M/vimode.zsh \
 		$M/path.zsh \
 		$M/git.zsh \
-		$P/$@.zsh; \
+		prompt.zsh; \
 	do \
-		(cat $$f; echo) >> $B/$@.zsh-theme; \
+		(cat $$f; echo) >> minimal.zsh-theme; \
 	done;
