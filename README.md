@@ -6,14 +6,14 @@ Here's a screenshot:
 
 Damn son! Show me teh codez!!
 =============================
-[Antigen](https://github.com/zsh-users/antigen):
-```
-antigen theme S1cK94/minimal
-```
-
 [Zgen](https://github.com/tarjoilija/zgen):
 ```
-zgen load S1cK94/minimal
+zgen load S1cK94/minimal minimal
+```
+
+[Antigen](https://github.com/zsh-users/antigen):
+```
+antigen theme S1cK94/minimal minimal
 ```
 
 [Oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh):
