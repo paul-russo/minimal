@@ -45,7 +45,10 @@ Let's breakdown the left prompt (from left to right):
 	- red if not.
 
 On the right prompt:
-- The two last diretory from `pwd`
+- The two last diretory from `pwd`.
+	- Directory names longer than 10 chars will be abbreviated if
+	`MINIMAL_SHORTEN` is set to `true`.  
+	eg: `01234567890ABCDEF -> 0123..CDEF`
 - The git branch name only when you are in a git repo.
 	Its color shows different statues:
 	- red if is dirty or has diverged from origin
