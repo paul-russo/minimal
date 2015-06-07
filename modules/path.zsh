@@ -25,3 +25,4 @@ function prompt_path() {
 
   echo "$path_color$rebuilt$rsc"
 }
+

@@ -26,3 +26,4 @@ function prompt_git() {
     echo " $infos"
   fi
 }
+
