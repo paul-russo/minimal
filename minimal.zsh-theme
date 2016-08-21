@@ -84,6 +84,12 @@ function prompt_vimode(){
   echo "$ret"
 }
 
+function prompt_hostname(){
+    if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+        echo "$(hostname -s):"
+    fi
+}
+
 function zle-line-init zle-line-finish zle-keymap-select {
   zle reset-prompt
   zle -R
@@ -93,5 +99,5 @@ zle -N zle-line-init
 zle -N zle-keymap-select
 zle -N zle-line-finish
 
-PROMPT='$(hostname -s):$(prompt_user)$(prompt_jobs)$(prompt_vimode)$(prompt_status) '
+PROMPT='$(prompt_hostname)$(prompt_user)$(prompt_jobs)$(prompt_vimode)$(prompt_status) '
 RPROMPT='$(prompt_path)$(prompt_git)'
