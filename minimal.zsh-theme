@@ -93,5 +93,5 @@ zle -N zle-line-init
 zle -N zle-keymap-select
 zle -N zle-line-finish
 
-PROMPT='$(hostname):$(prompt_user)$(prompt_jobs)$(prompt_vimode)$(prompt_status) '
+PROMPT='$(hostname -s):$(prompt_user)$(prompt_jobs)$(prompt_vimode)$(prompt_status) '
 RPROMPT='$(prompt_path)$(prompt_git)'
