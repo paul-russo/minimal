@@ -1,3 +1,8 @@
+DEPRECATION
+===========
+Deprecated in favor of [subnixr/minimal](https://github.com/subnixr/minimal)
+
+
 M_N_M_L
 =======
 Here's a screenshot:
