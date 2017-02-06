@@ -1,2 +1,2 @@
-PROMPT='$(prompt_hostname)$(prompt_user)$(prompt_jobs)$(prompt_vimode)$(prompt_status) '
-RPROMPT='$(prompt_path)$(prompt_git)'
+PROMPT='$(prompt_hostname)$(prompt_user)$(prompt_jobs)$(prompt_status) '
+RPROMPT='$(prompt_path)'
