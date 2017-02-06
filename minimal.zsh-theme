@@ -38,5 +38,5 @@ function prompt_path() {
   echo "$path_color$(print -P %2~ | sed s_/_${sep}_g)$rsc"
 }
 
-PROMPT='$(prompt_hostname)$(prompt_user)$(prompt_jobs)$(prompt_status) '
+PROMPT='$(prompt_user)$(prompt_jobs)$(prompt_status) '
 RPROMPT='$(prompt_path)'
